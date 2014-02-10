@@ -11,13 +11,8 @@ module OmniAuth
       option :client_options, {
         site:          'https://api.smt.docomo.ne.jp',
         authorize_url: '/api/login',
-        token_url:     '/1/access_token',
+        token_url:     'https://account-api.smt.docomo.ne.jp/1/access_token'
       }
-
-      option :token_params, {
-        grant_type: "authorization_code"
-      }
-
 
       uid{ access_token.to_s }
 
@@ -38,14 +33,6 @@ module OmniAuth
         end
       end
 
-      def request_phase
-        super
-      end
-
-      def callback_phase
-        p "callback_phase"
-        super
-      end
 
       def raw_info
         @raw_info ||= access_token.get('/me').parsed
