@@ -14,6 +14,10 @@ module OmniAuth
         token_url:     '/1/access_token',
       }
 
+      option :token_params, {
+        grant_type: "authorization_code"
+      }
+
 
       uid{ access_token.to_s }
 
@@ -35,6 +39,11 @@ module OmniAuth
       end
 
       def request_phase
+        super
+      end
+
+      def callback_phase
+        p "callback_phase"
         super
       end
 
