@@ -34,6 +34,10 @@ module OmniAuth
         end
       end
 
+      def request_phase
+        super
+      end
+
       def raw_info
         @raw_info ||= access_token.get('/me').parsed
       end
