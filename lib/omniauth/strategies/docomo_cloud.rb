@@ -6,11 +6,14 @@ module OmniAuth
 
       option :name, 'docomo_cloud'
 
+      option :authorize_options, [:display]
+
       option :client_options, {
         site:          'https://api.smt.docomo.ne.jp',
         authorize_url: '/api/login',
-        token_url:     '/1/access_token'
+        token_url:     '/1/access_token',
       }
+
 
       uid{ access_token.to_s }
 
@@ -23,6 +26,12 @@ module OmniAuth
 
       extra do
         { raw_info: raw_info }
+      end
+
+      def authorize_params
+        super.tap do |params|
+          params[:display] ||= 'pc'
+        end
       end
 
       def raw_info
