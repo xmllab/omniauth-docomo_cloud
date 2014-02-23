@@ -9,10 +9,6 @@ module OmniAuth
 
       option :name, 'docomo_cloud'
 
-      option :authorize_options, {
-        display: 'pc'
-      }
-
       option :client_options, {
         site:          API_SERVER,
         authorize_url: '/api/login',
@@ -29,10 +25,13 @@ module OmniAuth
         }
       end
 
+      option :authorize_params, {
+        display: 'smartphone'
+      }
+
       extra do
         { raw_info: raw_info }
       end
-
 
       def raw_info
         @raw_info ||= access_token.get("#{ACCOUNT_SERVER}/1/userid/get").parsed
